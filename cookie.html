@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cookie Manager</title>
+<!-- Required meta tags -->
+<meta name="author" content="Neldan Edward">
+<meta name="description" content="A simple cookie manager web application for setting, getting, and deleting cookies.">
+<meta name="keywords" content="cookies, cookie manager, web application, browser, set cookie, get cookie, delete cookie">
 <style type="text/css">
     table, td, input[type="button"], input[type="text"] {
         border: solid black 2px;
@@ -11,7 +15,7 @@
     }
     .division {
         border: solid black 2px;
-        background-color: #ccc;
+        background-color: #cccccc; 
         margin: 2px;
         padding: 1px;
         font-size: small;
@@ -27,51 +31,16 @@
     }
     div.v1 {
         width: 50%;
-        margin: 0 auto;
-        background-color: #eee;
+        margin: 0px auto;
+        background-color: #eeeeee; 
     }
 </style>
-</head>
-<body>
-
-<div class="division" style="font-size: 1.5em; text-align: center; background: black; color: white;">
-    COOKIE MANAGER
-</div>
-
-<div class="division">
-    Name: <input id="cname" type="text" size="10">
-    Value: <input id="cvalue" type="text" size="10">
-    <input type="button" value="SetCookie" onclick="create(); details();">
-    <input type="button" value="Clear" onclick="clearbox('cname'); clearbox('cvalue');">
-</div>
-
-<div class="division">
-    Name: <input id="cname2" type="text" size="10">
-    Value: <input id="cvalue2" type="text" size="10">
-    <input type="button" value="GetCookie" onclick="findcookie();">
-    <input type="button" value="Clear" onclick="clearbox('cname2'); clearbox('cvalue2');">
-</div>
-
-<div class="division">
-    Name: <input id="cname3" type="text" size="10">
-    <input type="button" value="DelCookie" onclick="deleteCookie(); details();">
-    <input type="button" value="Clear" onclick="clearbox('cname3');">
-</div>
-
-<div class="division">
-    <input id="raw" type="text" size="50">
-    <input type="button" value="RawCookie" onclick="raw(); details();">
-    <input type="button" value="Clear" onclick="clearbox('raw');">
-</div>
-
-<div id="info" class="division"></div>
-
 <script>
-    // This function will create a cookie
     function setCookie(name, value, days) {
         var x = new Date();
         x.setTime(x.getTime() + (days * 24 * 60 * 60 * 1000));
-        document.cookie = name + "=" + value + "; expires=" + x.toGMTString() + "; path=/";
+        document.cookie = name + "=" + value + "; expires=" + 
+        x.toGMTString() + "; path=/";
     }
 
     function getCookie(cookie2find) {
@@ -103,13 +72,11 @@
         setCookie(cname.value, cvalue.value, days);
     }
 
-    // Delete a cookie by setting a negative number of days
     function deleteCookie() {
         var cname3 = document.getElementById("cname3");
         setCookie(cname3.value, "", -1);
     }
 
-    // Load the raw cookie data
     function raw() {
         document.getElementById("raw").value = getraw();
     }
@@ -122,12 +89,15 @@
     function details() {
         var cookievalue = "", str = document.cookie;
         var cookie_array = str.split(";");
-        var x = "<table style='width:75%;'><tr><th colspan='2'>COOKIE LISTENING</th></tr>";
-        x += "<tr><th>Cookie Name</th><th>Cookie Value</th></tr>";
+        var x = "<table style='width:75%;'>";
+        x += "<tr><th colspan='2'>COOKIE LISTENING</th></tr>";
+        x += "<tr><th>Cookie Name</th>";
+        x += "<th>Cookie Value</th></tr>";
         if (document.cookie.length != 0)
             for (var i = 0; i < cookie_array.length; i++) {
                 var B = cookie_array[i].split("=");
-                x += "<tr><td style='width:10;'>" + B[0] + "</td><td style='width:10;'>" + B[1] + "</td></tr>";
+                x += "<tr><td style='width:10;'>" + B[0] + "</td>";
+                x += "<td style='width:10;'>" + B[1] + "</td></tr>";
             }
         x += "</table>";
         document.getElementById("info").innerHTML = x;
@@ -137,6 +107,33 @@
         document.getElementById(idname).value = "";
     }
 </script>
-
+</head>
+<body>
+<div class="division" style="font-size:1.5em;text-align:center;background:black;color:white;">
+    COOKIE MANAGER
+</div>
+<div class="division">
+    Name: <input id="cname" type="text" size="10">
+    Value: <input id="cvalue" type="text" size="10">
+    <input type="button" value="SetCookie" onClick="create(); details()" />
+    <input type="button" value="Clear" onClick="clearbox('cname'); clearbox('cvalue');" />
+</div>
+<div class="division">
+    Name: <input id="cname2" type="text" size="10">
+    Value: <input id="cvalue2" type="text" size="10">
+    <input type="button" value="GetCookie" onClick="findcookie()" />
+    <input type="button" value="Clear" onClick="clearbox('cname2'); clearbox('cvalue2');" />
+</div>
+<div class="division">
+    Name: <input id="cname3" type="text" size="10">
+    <input type="button" value="DelCookie" onClick="deleteCookie(); details();" />
+    <input type="button" value="Clear" onClick="clearbox('cname3');" />
+</div>
+<div class="division">
+    <input id="raw" type="text" size="50">
+    <input type="button" value="RawCookie" onClick="raw(); details();" />
+    <input type="button" value="Clear" onClick="clearbox('raw');" />
+</div>
+<div id="info" class="division"></div>
 </body>
 </html>
